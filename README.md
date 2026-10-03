@@ -56,7 +56,7 @@ app/
 ├── tools/  
 ├── workflows/  
 └── main.py  
-
+|__
 data/  
 docker/
 system_design.md   
@@ -107,7 +107,7 @@ streamlit run app.py
 
 {
   "company": "Apple",
-  "question": "Analyze market position"
+  "question": "Analyze Market Position"
 }
 
 ---
