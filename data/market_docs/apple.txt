@@ -2,7 +2,7 @@
 Apple is a global technology company focused on premium consumer electronics and ecosystem services.
 
 [SECTION: PRODUCTS]
-iPhone is Apple's primary revenue driver.
+IPhone is Apple's primary revenue driver.
 Mac and iPad serve productivity markets.
 Wearables include Apple Watch and AirPods.
 

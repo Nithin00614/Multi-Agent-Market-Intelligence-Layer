@@ -1,5 +1,5 @@
 [SECTION: COMPANY_OVERVIEW]
-Google (Alphabet) is a global technology company focused on search, ads, and cloud computing.
+Google is a global technology company focused on search, ads, and cloud computing.
 
 [SECTION: BUSINESS_MODEL]
 - Advertising (major revenue)

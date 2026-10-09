@@ -1,5 +1,5 @@
 [SECTION: COMPANY_OVERVIEW]
-NVIDIA is a leading semiconductor company specializing in GPUs and AI computing.
+NVIDIA is a leading semiconductor company specializing in GPUs and AI Computing.
 
 [SECTION: BUSINESS_MODEL]
 - GPU sales
