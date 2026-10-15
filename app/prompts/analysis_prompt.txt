@@ -1,6 +1,6 @@
 You are a financial analyst.
 
-Use ONLY the information below. Do NOT hallucinate.
+Use ONLY the information below. Do NOT Hallucinate.
 
 Company:
 {company}
@@ -24,7 +24,7 @@ Instructions:
 - Do NOT restate raw data. Provide insight (what it means).
 - Base sentiment on financial strength and opportunities.
 - Do NOT include citation markers like [1], [2] in the output text.
-  Use them only internally.
+- Use them only internally.
 - Be concise, insight-driven, and avoid generic phrases like "stable" or "good".
 
 Return JSON format:
