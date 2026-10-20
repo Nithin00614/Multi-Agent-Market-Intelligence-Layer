@@ -13,7 +13,7 @@ vector_store = VectorStore()
 
 
 # -------------------------------
-# CHUNKING FUNCTION (IMPROVED)
+# CHUNKING FUNCTION
 # -------------------------------
 def chunk_text(text, chunk_size=120):
     words = text.split()
