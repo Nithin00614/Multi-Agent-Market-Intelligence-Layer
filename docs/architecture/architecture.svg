@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1120" viewBox="0 0 1800 1120" role="img" aria-labelledby="title desc">
+  <title id="title">Market Intelligence Layer architecture</title>
+  <desc id="desc">Architecture diagram showing Streamlit, FastAPI, sequential LangGraph agents, external data services, local FAISS retrieval, Groq LLM, and the returned report.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L11 6 L1 11 Z" fill="#64748b"/></marker>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L11 6 L1 11 Z" fill="#2563eb"/></marker>
+    <style>
+      .bg{fill:#f8fafc}.title{font:700 34px Arial,sans-serif;fill:#0f172a}.subtitle{font:16px Arial,sans-serif;fill:#475569}
+      .label{font:700 16px Arial,sans-serif;fill:#0f172a}.sub{font:14px Arial,sans-serif;fill:#475569}.tiny{font:13px Arial,sans-serif;fill:#64748b}
+      .box{stroke-width:2;rx:14}.api{fill:#eff6ff;stroke:#60a5fa}.workflow{fill:#f1f5f9;stroke:#94a3b8}.agent{fill:#fff;stroke:#cbd5e1}
+      .service{fill:#ecfdf5;stroke:#34d399}.llm{fill:#f5f3ff;stroke:#a78bfa}.data{fill:#fffbeb;stroke:#fbbf24}
+      .line{fill:none;stroke:#64748b;stroke-width:3;marker-end:url(#arrow)}.lineBlue{fill:none;stroke:#2563eb;stroke-width:3;marker-end:url(#arrowBlue)}
+      .dash{fill:none;stroke:#94a3b8;stroke-width:2.5;stroke-dasharray:8 7;marker-end:url(#arrow)}
+      .group{fill:#f1f5f9;stroke:#cbd5e1;stroke-width:2;rx:20}.groupTitle{font:700 18px Arial,sans-serif;fill:#334155}
+    </style>
+  </defs>
+  <rect class="bg" width="1800" height="1120"/>
+  <text class="title" x="64" y="64">Market Intelligence Layer</text>
+  <text class="subtitle" x="64" y="94">Implemented runtime architecture · request to structured market report</text>
+
+  <!-- main request path -->
+  <rect class="box api" x="64" y="170" width="245" height="105"/>
+  <text class="label" x="186" y="209" text-anchor="middle">User</text>
+  <text class="sub" x="186" y="236" text-anchor="middle">Selects a company</text>
+
+  <rect class="box api" x="390" y="170" width="280" height="105"/>
+  <text class="label" x="530" y="209" text-anchor="middle">Streamlit UI</text>
+  <text class="sub" x="530" y="236" text-anchor="middle">app.py · displays report</text>
+
+  <rect class="box api" x="750" y="170" width="290" height="105"/>
+  <text class="label" x="895" y="209" text-anchor="middle">FastAPI endpoint</text>
+  <text class="sub" x="895" y="236" text-anchor="middle">POST /api/analyze-market</text>
+
+  <rect class="box api" x="1120" y="170" width="310" height="105"/>
+  <text class="label" x="1275" y="209" text-anchor="middle">LangGraph workflow</text>
+  <text class="sub" x="1275" y="236" text-anchor="middle">Shared analysis state</text>
+
+  <path class="line" d="M309 222 H380"/><path class="line" d="M670 222 H740"/><path class="line" d="M1040 222 H1110"/>
+  <text class="tiny" x="698" y="205" text-anchor="middle">HTTP</text>
+
+  <!-- graph execution -->
+  <rect class="group" x="64" y="355" width="1370" height="350"/>
+  <text class="groupTitle" x="92" y="390">Sequential graph execution</text>
+  <rect class="box agent" x="100" y="440" width="230" height="115"/>
+  <text class="label" x="215" y="480" text-anchor="middle">News agent</text><text class="sub" x="215" y="510" text-anchor="middle">Source + article metadata</text>
+  <rect class="box agent" x="410" y="440" width="230" height="115"/>
+  <text class="label" x="525" y="480" text-anchor="middle">Financial agent</text><text class="sub" x="525" y="510" text-anchor="middle">Company metrics</text>
+  <rect class="box agent" x="720" y="440" width="230" height="115"/>
+  <text class="label" x="835" y="480" text-anchor="middle">RAG retrieval</text><text class="sub" x="835" y="510" text-anchor="middle">Company filtered context</text>
+  <rect class="box agent" x="1030" y="440" width="230" height="115"/>
+  <text class="label" x="1145" y="480" text-anchor="middle">Analysis agent</text><text class="sub" x="1145" y="510" text-anchor="middle">Summary, risks, citations</text>
+  <rect class="box agent" x="1340" y="440" width="230" height="115"/>
+  <text class="label" x="1455" y="480" text-anchor="middle">Strategy agent</text><text class="sub" x="1455" y="510" text-anchor="middle">Decision + confidence</text>
+  <path class="line" d="M330 498 H400"/><path class="line" d="M640 498 H710"/><path class="line" d="M950 498 H1020"/><path class="line" d="M1260 498 H1330"/>
+  <path class="lineBlue" d="M1275 275 V330 H215 V430"/>
+  <text class="tiny" x="690" y="323" text-anchor="middle">invoke(company)</text>
+  <path class="lineBlue" d="M1455 565 V645 H530 V285"/>
+  <text class="tiny" x="970" y="638" text-anchor="middle">final state returned as JSON for UI rendering</text>
+
+  <!-- integrations -->
+  <rect class="box service" x="100" y="805" width="280" height="105"/>
+  <text class="label" x="240" y="844" text-anchor="middle">NewsAPI</text><text class="sub" x="240" y="871" text-anchor="middle">Recent company articles</text>
+  <path class="line" d="M215 555 V785 H240 V795"/>
+
+  <rect class="box service" x="435" y="805" width="280" height="105"/>
+  <text class="label" x="575" y="844" text-anchor="middle">Yahoo Finance via yfinance</text><text class="sub" x="575" y="871" text-anchor="middle">Price, market cap, ratios</text>
+  <path class="line" d="M525 555 V795"/>
+
+  <rect class="box data" x="770" y="805" width="310" height="105"/>
+  <text class="label" x="925" y="844" text-anchor="middle">Local knowledge store</text><text class="sub" x="925" y="871" text-anchor="middle">FAISS index + metadata pickle</text>
+  <path class="line" d="M835 555 V795"/>
+
+  <rect class="box llm" x="1170" y="805" width="300" height="105"/>
+  <text class="label" x="1320" y="844" text-anchor="middle">Groq LLM service</text><text class="sub" x="1320" y="871" text-anchor="middle">Analysis + strategy prompts</text>
+  <path class="line" d="M1145 555 V735 H1320 V795"/><path class="line" d="M1455 555 V735 H1320"/>
+
+  <!-- supporting data -->
+  <rect class="box data" x="100" y="970" width="420" height="95"/>
+  <text class="label" x="310" y="1008" text-anchor="middle">Company reference documents</text><text class="sub" x="310" y="1036" text-anchor="middle">data/market_docs/*.txt</text>
+  <rect class="box service" x="625" y="970" width="420" height="95"/>
+  <text class="label" x="835" y="1008" text-anchor="middle">Sentence Transformers</text><text class="sub" x="835" y="1036" text-anchor="middle">all-MiniLM-L6-v2 embeddings</text>
+  <path class="dash" d="M310 970 V930 H925 V920"/><path class="dash" d="M835 970 V930 H925 V920"/>
+  <text class="tiny" x="1140" y="1005">Solid arrows: runtime flow / calls</text>
+  <text class="tiny" x="1140" y="1035">Dashed arrows: local indexing inputs</text>
+</svg>
