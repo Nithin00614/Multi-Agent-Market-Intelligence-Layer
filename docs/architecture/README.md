@@ -1,4 +1,4 @@
-# Market Intelligence Layer: high-level architecture
+# Market Intelligence Layer: High-Level Architecture
 
 ## Overview
 
